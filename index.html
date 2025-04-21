@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Bio Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anime+Ace&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://files.catbox.moe/11ntr5.gif') repeat;
+            background-size: cover;
+            background-color: #ff0000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            max-width: 90%;
+        }
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #ff0000;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            margin: 10px auto;
+            animation: spin 3s linear infinite;
+        }
+        h1 {
+            font-size: 2em;
+            color: #ff0000;
+            text-shadow: 2px 2px 5px #ff00ff;
+            animation: glow 1s ease-in-out infinite alternate;
+            margin: 5px 0;
+        }
+        .anime-text {
+            font-family: 'Anime Ace', cursive;
+            font-size: 1.5em;
+            color: #fff;
+            text-shadow: 0 0 5px #000, 0 0 10px #000;
+            animation: fadeIn 2s ease-in-out infinite;
+            margin: 5px 0;
+        }
+        .highlight {
+            color: #ff0000;
+            font-weight: bold;
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff0000;
+        }
+        .icons {
+            margin-top: 15px;
+        }
+        .icons a {
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 1.5em;
+            transition: transform 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+        .icons a:hover {
+            transform: scale(1.2);
+        }
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        .audio-control {
+            margin-top: 10px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        .audio-control:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .audio-icon {
+            width: 24px;
+            height: 24px;
+        }
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            max-width: 80%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 20px;
+            box-shadow: -5px 0 15px rgba(255, 255, 255, 0.3);
+            transition: right 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 2;
+            font-family: Arial, sans-serif;
+            overflow-y: auto;
+        }
+        .menu.open {
+            right: 0;
+            opacity: 1;
+            visibility: visible;
+        }
+        .menu h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #ff0000;
+            text-shadow: 1px 1px 3px #ff00ff;
+        }
+        .menu p {
+            margin: 10px 0;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+        .menu .highlight {
+            color: #ff0000;
+        }
+        .menu .back-arrow {
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #fff;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .menu .back-arrow:hover {
+            color: #ff0000;
+        }
+        .no-js .menu {
+            position: static;
+            right: auto;
+            opacity: 1;
+            visibility: visible;
+            width: 100%;
+            max-width: 100%;
+            margin-top: 20px;
+            box-shadow: none;
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff0000;
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000;
+            }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            .anime-text {
+                font-size: 1.2em;
+            }
+            .icons a {
+                margin: 0 5px;
+                font-size: 1.2em;
+            }
+            .social-icon {
+                width: 20px;
+                height: 20px;
+            }
+            .audio-control {
+                width: 30px;
+                height: 30px;
+            }
+            .audio-icon {
+                width: 18px;
+                height: 18px;
+            }
+            .spinner {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+        <style>
+            .container {
+                padding-bottom: 10px;
+            }
+            .icons a#otherLink {
+                display: none;
+            }
+        </style>
+    </noscript>
+    <div class="container">
+        <img src="https://files.catbox.moe/bvk1ia.jpg" alt="Profile Pic" class="profile-pic">
+        <h1>siziks</h1>
+        <p class="anime-text">I am siziks, play to standoff 2</p>
+        <div class="audio-control" id="audioControl">
+            <img id="audioIcon" class="audio-icon" src="https://i.ibb.co/7J2XjYq/play-icon.png" alt="Play/Pause Icon">
+        </div>
+        <img src="https://media.tenor.com/3fZ7Q7qJ5wQAAAAi/spinner-black-and-white.gif" alt="Spinner GIF" class="spinner">
+        <div class="icons">
+            <a href="http://dsc.gg/saturnxq" title="Discord">
+                <img src="https://files.catbox.moe/x10dqs.png" alt="Discord Icon" class="social-icon">
+            </a>
+            <a href="https://t.me/your-telegram-link" style="color: #0088cc;" title="Telegram">📱</a>
+            <a href="#" id="otherLink" title="Other">
+                <img src="https://files.catbox.moe/j96wxg.png" alt="Other Icon" class="social-icon">
+            </a>
+        </div>
+        <audio id="song" src="https://files.catbox.moe/fv74ay.mp3" preload="auto"></audio>
+    </div>
+
+    <div class="menu" id="menu">
+        <h2>About Me</h2>
+        <p>Имя: Макс</p>
+        <p>Возраст: 15</p>
+        <p>Страна пребывания: Польша</p>
+        <p>Айдишечка в стандоффе: <span class="highlight">161972127</span></p>
+        <div class="back-arrow" id="backArrow">← Скрыть детали</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('song');
+            const audioControl = document.getElementById('audioControl');
+            const audioIcon = document.getElementById('audioIcon');
+            const otherLink = document.getElementById('otherLink');
+            const menu = document.getElementById('menu');
+            const backArrow = document.getElementById('backArrow');
+            let isPlaying = false;
+
+            audio.muted = true;
+            audio.play().then(() => {
+                audio.muted = false;
+                isPlaying = true;
+                audioIcon.src = 'https://i.ibb.co/7vQdL3N/pause-icon.png';
+            }).catch(error => {
+                console.log("Autoplay was prevented: ", error);
+                document.addEventListener('click', function playOnInteraction() {
+                    audio.muted = false;
+                    audio.play().then(() => {
+                        isPlaying = true;
+                        audioIcon.src = 'https://i.ibb.co/7vQdL3N/pause-icon.png';
+                    }).catch(err => console.log("Playback failed: ", err));
+                    document.removeEventListener('click', playOnInteraction);
+                }, { once: true });
+            });
+
+            audioControl.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    audioIcon.src = 'https://i.ibb.co/7J2XjYq/play-icon.png';
+                } else {
+                    audio.muted = false;
+                    audio.play().catch(err => console.log("Playback failed: ", err));
+                    audioIcon.src = 'https://i.ibb.co/7vQdL3N/pause-icon.png';
+                }
+                isPlaying = !isPlaying;
+            });
+
+            otherLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                menu.classList.toggle('open');
+            });
+
+            backArrow.addEventListener('click', function() {
+                menu.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
